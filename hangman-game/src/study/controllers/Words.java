@@ -14,7 +14,6 @@ public class Words {
 
     public Words() {
         
-
     }
 
     public void addWord(String word) {
@@ -42,16 +41,25 @@ public class Words {
         return dataBase;
     }
 
-    public static void save(String way, List<String> dataBase) {
+    public static void save(String way, List<String> dataBase, String newWord) {
+        dataBase.add(newWord.toUpperCase());
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(way))) {
             for (String word : dataBase) {
-                bw.write(word + "\n");
+                bw.write(word);
                 bw.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static void main(String[] args) {
+        String way = "hangman-game/src/resources/words.txt";
+        List<String> dataBase = load(way);
+        System.out.println(dataBase);
+        save(way, dataBase, "test");
+        System.out.println(dataBase);
     }
 
 }

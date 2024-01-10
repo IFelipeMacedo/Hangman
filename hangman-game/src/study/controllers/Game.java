@@ -2,7 +2,7 @@ package study.controllers;
 
 
 public class Game {
-    int attempts = 6;
+    int attempts = 8;
     String secretWord = "";
 
 
