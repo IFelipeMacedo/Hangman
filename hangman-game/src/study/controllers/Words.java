@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Random;
 
 public class Words {
-    String way = "hangman-game/src/resources/words.txt";
-    List<String> dataBase = load(way);
+    private List<String> dataBase;
 
     public Words() {
-        
-    }
+        dataBase = load();
+    } 
 
-    public void addWord(String word) {
-        dataBase.add(word);
+    public void addWord(String newWord) {
+        dataBase.add(newWord.toUpperCase());
+        save(dataBase);
     }
 
     public String getWord() {
@@ -26,10 +26,10 @@ public class Words {
         return dataBase.get(randomNumber);
     }
 
-    public static List<String> load(String way) {
+    public static List<String> load() {
         List<String> dataBase = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(way))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("hangman-game/src/resources/words.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 dataBase.add(line);
@@ -41,9 +41,8 @@ public class Words {
         return dataBase;
     }
 
-    public static void save(String way, List<String> dataBase, String newWord) {
-        dataBase.add(newWord.toUpperCase());
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(way))) {
+    public static void save(List<String> dataBase) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("hangman-game/src/resources/words.txt"))) {
             for (String word : dataBase) {
                 bw.write(word);
                 bw.newLine();
@@ -54,12 +53,11 @@ public class Words {
 
     }
 
-    public static void main(String[] args) {
-        String way = "hangman-game/src/resources/words.txt";
-        List<String> dataBase = load(way);
-        System.out.println(dataBase);
-        save(way, dataBase, "test");
-        System.out.println(dataBase);
+    public List<String> getWords() {
+        return dataBase;
     }
+
+
+
 
 }
