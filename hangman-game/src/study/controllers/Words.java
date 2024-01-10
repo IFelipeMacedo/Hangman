@@ -1,19 +1,17 @@
 package study.controllers;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Words {
+    private static final String PATH = "hangman-game/src/resources/words.txt";
     private List<String> dataBase;
 
     public Words() {
         dataBase = load();
-    } 
+    }
 
     public void addWord(String newWord) {
         dataBase.add(newWord.toUpperCase());
@@ -22,14 +20,18 @@ public class Words {
 
     public String getWord() {
         Random random = new Random();
-        int randomNumber = random.nextInt(dataBase.size() + 1);
+        int randomNumber = random.nextInt(dataBase.size());
         return dataBase.get(randomNumber);
     }
 
-    public static List<String> load() {
+    public List<String> getWords() {
+        return dataBase;
+    }
+
+    private static List<String> load() {
         List<String> dataBase = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("hangman-game/src/resources/words.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(PATH))) {
             String line;
             while ((line = br.readLine()) != null) {
                 dataBase.add(line);
@@ -41,8 +43,8 @@ public class Words {
         return dataBase;
     }
 
-    public static void save(List<String> dataBase) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("hangman-game/src/resources/words.txt"))) {
+    private static void save(List<String> dataBase) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH))) {
             for (String word : dataBase) {
                 bw.write(word);
                 bw.newLine();
@@ -50,14 +52,5 @@ public class Words {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-    public List<String> getWords() {
-        return dataBase;
-    }
-
-
-
-
 }
