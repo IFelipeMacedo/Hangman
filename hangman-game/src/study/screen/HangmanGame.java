@@ -12,6 +12,7 @@ public class HangmanGame {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("A palavra secreta: " + game.displayWord());
+        System.out.println("Dica: Fruta");
 
         while (game.getAttempts() > 0 && !game.isWordGuessed()) {
             System.out.println("Você tem " + game.getAttempts() + " tentativas");
@@ -25,6 +26,7 @@ public class HangmanGame {
                 System.out.println("A palavra secreta é : " + game.displayWord());
             }
         }
+
 
         if (game.isWordGuessed()) {
             System.out.println("Você venceu!");

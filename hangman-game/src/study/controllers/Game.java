@@ -1,7 +1,7 @@
 package study.controllers;
 
 public class Game {
-    private int attempts = 12;
+    private int attempts = 8;
     private String secretWord = "";
     private boolean[] guessedLetters;
 
@@ -13,10 +13,10 @@ public class Game {
     public String displayWord() {
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < secretWord.length(); i++) {
-            if (guessedLetters[i]) {
-                word.append(secretWord.charAt(i));
+            if (guessedLetters[i]) { 
+                word.append(secretWord.charAt(i)); 
             } else {
-                word.append("_");
+                word.append(" _ ");
             }
         }
         return word.toString();
