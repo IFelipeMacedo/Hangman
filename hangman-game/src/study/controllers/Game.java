@@ -1,7 +1,7 @@
 package study.controllers;
 
 public class Game {
-    private int attempts = 10;
+    private int attempts = 12;
     private String secretWord = "";
     private boolean[] guessedLetters;
 
